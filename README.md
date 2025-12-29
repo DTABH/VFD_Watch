@@ -6,7 +6,7 @@
 <ul>
   <li> 
     As a wristwatch, it was to big for me and with a neccessary WLAN and fixed network parameters not practical. <br>
-    So i will make a small desktop watch adding some things like .....
+    So i will make/made a small desktop watch adding some things like .....
   </li> 
  <li>Implemented  a cheap china RTC Modul (see Pictures) using second I2C-bus  Wire1.setPins(27, 14);  <br>
     I tried first existing SDA and SCL used for the clock multiplexer. But this doesn't work <br>
