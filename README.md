@@ -4,6 +4,10 @@
 **FW_VERSION "2.0.0 dtabh"**
 
 <ul>
+  <li> 
+    As a wristwatch, it was to big for me and with a neccessary WLAN and fixed network parameters not practical
+    so i will make a small desktop watch adding some things.
+  </li> 
  <li>Implemented  a cheap china RTC Modul (see Pictures) using second I2C-bus  Wire1.setPins(27, 14);  <br>
     I tried first existing SDA and SCL used for the clock multiplexer. But this doesn't work <br>
     If a NTP connection exists, the time from NTP will be used (RTC is synchonized). <br>
@@ -31,7 +35,15 @@
   </li>
 
 </ul>
-<br>  <br>  <br>  <br>  <br>
+<br>  <br>  <br>  
+
+**Images:**
+
+
+![alt text](https://github.com/DTABH/VFD_Watch/blob/master/Graphics/IMG_1260.jpg)  
+![alt text](https://github.com/DTABH/VFD_Watch/blob/master/Graphics/IMG_1261.jpg)  
+![alt text](https://github.com/DTABH/VFD_Watch/blob/master/Graphics/IMG_1264.jpg)  
+<br>  <br> <br>  <br>  
 
 # original readme -----------------------------------------------------------
 
