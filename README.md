@@ -1,3 +1,39 @@
+
+# Changes DTABH :
+
+**FW_VERSION "2.0.0 dtabh"**
+
+<ul>
+ <li>Implemented  a cheap china RTC Modul (see Pictures) using second I2C-bus  Wire1.setPins(27, 14);  <br>
+    I tried first existing SDA and SCL used for the clock multiplexer. But this doesn't work <br>
+    If a NTP connection exists, the time from NTP will be used (RTC is synchonized). <br>
+    If NTP fails RTC ist used. If no WLAN-connection exists the RTC-Only mode is activated. <br>
+    Time and date can/must be set via middle button  (BTN1) 
+  </li>
+  <li> 
+    Add Showdate every 30 seconds. Configurable via right button.
+  </li>  
+   <li> 
+    Add Wifimanager to configure wifi connnection and ntpserver, timezone,
+  </li> 
+  <li> Extended the menu. <br>
+      Menu starting with long pressed button <br> 
+    
+      Button Left (BTN0)    >= 3 seconds  Start accesspoint of  Wifimanager with existing configuration 
+                            >= 6 seconds  Delete configuration and Start accesspoint of  Wifimanager. (Reset)
+    
+      Button Middle (BTN1)  >= 3 seconds  set RTC_only and opens manual input menu for "minutes, hours"
+                                          and if showdate is activated  for "day of month, month, year"                                        
+                            >= 6 seconds  unset RTC_only set manual/RTC time to begin of unixtime and restart th ESP 
+                                          which then opens the accesspoint of wifimanager (Reset)
+                            
+      Button Right (BTN2)   >= 2 seconds Toggle showdate.     
+  </li>
+
+</ul>
+
+# original readme -----------------------------------------------------------
+
 # VFD Watch Project
 
 This project was originally inspired by Johngineer's [ChronodeVFD](https://blog.adafruit.com/2014/10/29/chronodevfd-a-watch-by-johngineer-wearablewednesday/) project. However no concrete design information were available therefore this project was born.
