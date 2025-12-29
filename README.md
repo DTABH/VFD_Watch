@@ -15,10 +15,13 @@
     Time and date can/must be set via middle button  (BTN1) 
   </li>
   <li> 
-    Add Showdate every 30 seconds. Configurable via right button.
+    Both dots changing on off every second
+  </li>
+  <li> 
+    Add Showdate every 30 seconds with only lower dot on. On/Off toggle via right button.
   </li>  
    <li> 
-    Add Wifimanager to configure wifi connnection and ntpserver, timezone,
+    Add Wifimanager to configure wifi connnection, ntpserver and timezone,
   </li> 
   <li> Extended the menu. <br>
       Menu starting with long pressed button <br> 
@@ -26,9 +29,10 @@
       Button Left (BTN0)    >= 3 seconds  Start accesspoint of  Wifimanager with existing configuration 
                             >= 6 seconds  Delete configuration and Start accesspoint of  Wifimanager. (Reset)
     
-      Button Middle (BTN1)  >= 3 seconds  set RTC_only and opens manual input menu for "minutes, hours"
-                                          and if showdate is activated  for "day of month, month, year"                                        
-                            >= 6 seconds  unset RTC_only set manual/RTC time to begin of unixtime and restart th ESP 
+      Button Middle (BTN1)  >= 3 seconds  set RTC_only and opens manual input menu for "minutes, hours" (both dots on)
+                                          and if showdate is activated  for "day of month, month" (only lower dot is on)
+                                          and "year" (no dots)                                        
+                            >= 6 seconds  unset RTC_only set manual/RTC time to begin of unixtime and restart the ESP 
                                           which then opens the accesspoint of wifimanager (Reset)
                             
       Button Right (BTN2)   >= 2 seconds Toggle showdate.     
@@ -39,10 +43,24 @@
 
 **Images:**
 
+RTC-Module "stable" connected to ground with 1,5mm" cooper wire.
 
-![alt text](https://github.com/DTABH/VFD_Watch/blob/master/Graphics/IMG_1260.jpg)  
+![alt text](https://github.com/DTABH/VFD_Watch/blob/master/Graphics/IMG_1260.jpg) 
+
+
 ![alt text](https://github.com/DTABH/VFD_Watch/blob/master/Graphics/IMG_1261.jpg)  
+
+Shows date for 2 seconds every 30 seconds (low dot only)
+
 ![alt text](https://github.com/DTABH/VFD_Watch/blob/master/Graphics/IMG_1264.jpg)  
+
+<br>  <br> <br>  <br>  
+
+**Remarks:**
+
+The source code has become a bit messy. Sorry but it works for me.  <br> 
+Especially switching between WLAN/NTP and only RTC. Timezone an no timezone etc.  <br> 
+let me make it too complex. There is possible improvement. But not for me.  <br> 
 <br>  <br> <br>  <br>  
 
 # original readme -----------------------------------------------------------
