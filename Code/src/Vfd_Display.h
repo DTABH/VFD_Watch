@@ -4,7 +4,7 @@
 #include <Arduino.h>
 #include <Ticker.h>
 #include <Wire.h>
-#include "Adafruit_MCP23017.h"
+#include "Adafruit_MCP23X17.h"
 
 #define EN_24V     2
 #define HEAT_EN   18
@@ -33,7 +33,7 @@
 #define CHAR_5    14 //DP
 
 class vfdDisplay{
-  static Adafruit_MCP23017 mcp;
+  static Adafruit_MCP23X17 mcp;
   Ticker tickerMultiplex;
 public:
   struct character{ // data type of a single 7-segment

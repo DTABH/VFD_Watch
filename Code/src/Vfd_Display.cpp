@@ -2,8 +2,8 @@
 #include <Arduino.h>
 #include <Ticker.h>
 #include <Wire.h>
-#include "Adafruit_MCP23017.h"
-
+#include "Adafruit_MCP23X17.h"
+#include "RTClib.h"
 
 vfdDisplay::vfdDisplay(){}
 
@@ -26,7 +26,7 @@ uint16_t vfdDisplay::_dataMultiplex[5] = {
   0x0000
 };
 
-Adafruit_MCP23017 vfdDisplay::mcp;
+Adafruit_MCP23X17 vfdDisplay::mcp;
 
 void vfdDisplay::begin(
   uint8_t dutyCycle,
@@ -51,16 +51,20 @@ void vfdDisplay::begin(
   _dutyCycle = dutyCycle; //invert value
 
   Wire.setClock(400000L);
-  mcp.begin();
+  mcp.begin_I2C();
   for(int i = 0; i < 16; i++){
     mcp.pinMode(i,OUTPUT);
   }
   mcp.writeGPIOAB(0x0000); // all pins low
 
   // PWM setup
-  ledcSetup(0, _freqHeat, 8);
-  ledcAttachPin(HEAT_INT1, 0);
-  ledcWrite(0, _dutyCycle);
+  //ledcSetup(0, _freqHeat, 8);
+  //ledcAttachPin(HEAT_INT1, 0);
+  //ledcWrite(0, _dutyCycle);
+
+  ledcAttach(HEAT_INT1, _freqHeat, 8); 
+  ledcWrite(HEAT_INT1, _dutyCycle);
+
 
   tickerMultiplex.attach_ms(
     1000.0/_freqMultiplex,
@@ -99,18 +103,24 @@ void vfdDisplay::_updateMultiplex(){
 }
 
 void vfdDisplay::deactivate(){
+  Serial.println("vfdDisplay::deactivate");
   digitalWrite(EN_24V, LOW);
   digitalWrite(HEAT_EN, LOW);
   tickerMultiplex.detach();
 }
 
 void vfdDisplay::activate(){
+  Serial.println("vfdDisplay::activate");
   digitalWrite(EN_24V, HIGH);
   digitalWrite(HEAT_EN, HIGH);
   // PWM setup
-  ledcSetup(0, _freqHeat, 8);
-  ledcAttachPin(HEAT_INT1, 0);
-  ledcWrite(0, _dutyCycle);
+  //ledcSetup(0, _freqHeat, 8);
+  //ledcAttachPin(HEAT_INT1, 0);
+  //ledcWrite(0, _dutyCycle);
+
+  ledcAttach(HEAT_INT1, _freqHeat, 8); 
+  ledcWrite(HEAT_INT1, _dutyCycle);
+
   tickerMultiplex.attach_ms(1000.0/_freqMultiplex, _nextMultiplex);
 }
 
@@ -121,7 +131,8 @@ void vfdDisplay::setDutyCycle(uint8_t duty){
 
 void vfdDisplay::setHours(uint8_t hours){
   switch ((hours % 100)/10) { //        a  b  c  d  e  f  g
-    case 0: {vfdDisplay::character c = {1, 1, 1, 1, 1, 1, 0}; _screen.digit[0] = c; break;}
+    case 0: {vfdDisplay::character c = {1, 1, 1, 1, 1, 1, 0}; _screen.digit[0] = c; break;} //  leading "0"
+    //case 0: {vfdDisplay::character c = {0, 0, 0, 0, 0, 0, 1}; _screen.digit[0] = c; break;} //  "-"  instead of leading "0"
     case 1: {vfdDisplay::character c = {0, 1, 1, 0, 0, 0, 0}; _screen.digit[0] = c; break;}
     case 2: {vfdDisplay::character c = {1, 1, 0, 1, 1, 0, 1}; _screen.digit[0] = c; break;}
     case 3: {vfdDisplay::character c = {1, 1, 1, 1, 0, 0, 1}; _screen.digit[0] = c; break;}
